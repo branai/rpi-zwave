@@ -19,8 +19,8 @@
 //
 //
 
-var tls = require('tls');
-var crypto = require('crypto');
+var tls = require('tls'),
+    crypto = require('crypto');
 
 // From Node docs for TLS module.
 var RECOMMENDED_CIPHERS = 'ECDHE-RSA-AES256-SHA:AES256-SHA:RC4-SHA:RC4:HIGH:!MD5:!aNULL:!EDH:!AESGCM';
@@ -33,24 +33,23 @@ function starttlsClient(socket, options, callback) {
 }
 
 function starttls(socket, options, callback, isServer) {
-  var sslcontext;
+  var sslcontext, pair, cleartext;
 
-  var opts = {};
-  Object.keys(options).forEach(function(key) {
-    opts[key] = options[key];
-  });
-  if (!opts.ciphers) {
-    opts.ciphers = RECOMMENDED_CIPHERS;
+  var opts = { };
+  for (k in options) {
+    opts[k] = options[k];
   }
+  if (!opts.ciphers)
+    opts.ciphers = RECOMMENDED_CIPHERS;
 
-  socket.removeAllListeners('data');
+  socket.removeAllListeners("data");
   if (tls.createSecureContext) {
     sslcontext = tls.createSecureContext(opts);
   } else {
     sslcontext = crypto.createCredentials(opts);
   }
-  var pair = tls.createSecurePair(sslcontext, isServer);
-  var cleartext = pipe(pair, socket);
+  pair = tls.createSecurePair(sslcontext, isServer);
+  cleartext = pipe(pair, socket);
 
   var erroredOut = false;
   pair.on('secure', function() {
@@ -82,12 +81,12 @@ function starttls(socket, options, callback, isServer) {
 }
 
 function forwardEvents(events, emitterSource, emitterDestination) {
-  var map = [];
+  var map = [], name, handler;
 
   for (var i = 0, len = events.length; i < len; i++) {
-    var name = events[i];
+    name = events[i];
 
-    var handler = forwardEvent.bind(emitterDestination, name);
+    handler = forwardEvent.bind(emitterDestination, name);
 
     map.push(name);
     emitterSource.on(name, handler);
@@ -124,7 +123,7 @@ function pipe(pair, socket) {
     }
   }
 
-  var map = forwardEvents(['timeout', 'end', 'close', 'drain', 'error'], socket, cleartext);
+  var map = forwardEvents(["timeout", "end", "close", "drain", "error"], socket, cleartext);
 
   function onclose() {
     socket.removeListener('error', onerror);
