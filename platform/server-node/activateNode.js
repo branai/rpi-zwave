@@ -1,7 +1,10 @@
 var ZWave = require('openzwave-shared');
 var os = require('os');
+//Will be useful for when more nodes are added and they return different types
 var supportedSignals = ['boolean'];
+//Port for the zstick (CAN BE DIFFERENT FOR OTHER SYSTEMS), so TODO: unimportant: write method to find port for zstick in /dev/ directory
 var porty = '/dev/ttyACM0';
+//Data structure for all nodes on porty network
 var nodes = [];
 
 var zwave = new ZWave({
@@ -12,7 +15,7 @@ var zwave = new ZWave({
 console.log("CONNECTING TO " + porty);
 zwave.connect(porty);
 
-//Scan node/zstick
+//Any scan of any node/zstick is finished scanning
 zwave.on('scan complete', function() { console.log('___scan complete___'); });
 
 //Add a node to data structure
@@ -32,7 +35,7 @@ zwave.on('node ready', function(nodeid, nodeinfo) {
   console.log('DEVICE NAME: '+nodeinfo.type);
 });
 
-//I have no idea what this does
+//Add all data structures when the nodeid datastructures are not undefined
 zwave.on('value added', function(nodeid, commandclass, value) {
   if (!nodes[nodeid]['classes'][commandclass]) {
     nodes[nodeid]['classes'][commandclass] = {};
@@ -40,6 +43,7 @@ zwave.on('value added', function(nodeid, commandclass, value) {
   nodes[nodeid]['classes'][commandclass][value.index] = value;
 });
 
+//These states are what will be potentially read in main.js
 exports.states = {
   "old":false,
   "updated":false

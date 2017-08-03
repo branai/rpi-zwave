@@ -1,20 +1,21 @@
 var ftpd = require('ftpd');
 var options = {
-    host: process.env.IP || '10.0.0.27',
-    port: process.env.PORT || 7002,
+    host: process.env.IP || '10.0.0.27', //<-- localhost ip address
+    port: process.env.PORT || 7002, //<-- port 7002 can ftp
   };
 
 var server = new ftpd.FtpServer(options.host, {
-  getInitialCwd: function () {
-    return '/';
-  },
   getRoot: function () {
-    return process.cwd()+'/client-server/ftpPostOffice/';
+    return process.cwd()+'/client-server/ftpPostOffice/'; //<-- all communication takes place in this directory
+  },
+  getInitialCwd: function () {
+    return '/'; //<-- starting directory relative to getRoot
   },
 });
 
+//This method authorizes EVERYONE who connects, so TODO: create a authentication system based off of a attribute in handel.json
 server.on('client:connected', function (connection) {
-  connection.on('command:user', function (user, success, failure) { 
+  connection.on('command:user', function (user, success, failure) {
     success();
   });
   connection.on('command:pass', function (pass, success, failure) {
@@ -28,4 +29,5 @@ server.on('error', function (error) {
 
 server.debugging = 4;
 server.listen(options.port);
+//Make server public for potential changes to the .on methods
 exports.server = server;
