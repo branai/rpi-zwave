@@ -7,12 +7,15 @@ nodeLookout.zwave.on('value changed', function() {
   //checkMail() parses 'client-server/ftpPostOffice/delivery/handel.json'
   var obj = checkMail();
   if(obj['protocol'] == true) {
+    var state = {"current":false};
     //nodeLookout.states.updated changes everytime 'value changed', see 'client-server/server.js'
     if(nodeLookout.states.updated == true){
        //TODO: make protocol that communicated server --> client
-       console.log('movement');
+       state["current"] = true;
+       fs.writeFile('client-server/ftpPostOffice/public/state.json', JSON.stringify(state));
     } else {
-       console.log('none');
+       state["current"] = false;
+       fs.writeFile('client-server/ftpPostOffice/public/state.json', JSON.stringify(state));
     }
   }
 });
