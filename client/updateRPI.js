@@ -1,28 +1,37 @@
 var ftpClient = require('ftp-client');
 var fs = require('fs');
+var os = require('os');
+var network = os.networkInterfaces();
 var config = {
-    host: '10.0.0.27', //<-- ip to ftp to
+    host: '10.252.35.9', //<-- ip to ftp to
     port: 7002 //<-- ftp port server is taking ftp requests
 }
 
 var options = {
     logging: 'basic'
 }
+
+var myInfo = {
+    ip: network.en0[1]['address'],
+    ma: network.en0[1]['mac']
+}
+
 //Run protocol that sends the protocol and some info (main.js)
-exports.send = function(protocol,info) {
-    //Read 'mail/handel.json'
-    var obj1 = function () {return(JSON.parse(fs.readFileSync('mail/handel.json')))};
+exports.send = function(protocol) {
+    //Read 'mail/handle.json'
+    var obj1 = function () {return(JSON.parse(fs.readFileSync('mail/handle.json')))};
     var obj = obj1();
-    //Update 'mail/handel.json' info
+    //Update 'mail/handle.json' info
     obj['protocol'] = protocol;
-    obj['info'] = info;
-    //Update 'mail/handel.json'
+    obj['info'] = myInfo;
+    console.log(obj);
+    //Update 'mail/handle.json'
     var json = JSON.stringify(obj);
-    fs.writeFile('mail/handel.json', json);
+    fs.writeFile('mail/handle.json', json);
     //This client connection can be moved once more features are added
     var client = new ftpClient(config, options);
     client.connect(function () {
-        client.upload(['mail/handel.json'], 'delivery', {
+        client.upload(['mail/handle.json'], 'delivery', {
             baseDir: 'mail',
             overwrite: 'older'
         }, function (result) {

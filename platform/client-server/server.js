@@ -13,7 +13,7 @@ var server = new ftpd.FtpServer(options.host, {
   },
 });
 
-//This method authorizes EVERYONE who connects, so TODO: create a authentication system based off of a attribute in handel.json
+//This method authorizes EVERYONE who connects, so TODO: create a authentication system based off of a attribute in handle.json
 server.on('client:connected', function (connection) {
   connection.on('command:user', function (user, success, failure) {
     success();

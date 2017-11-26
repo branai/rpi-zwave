@@ -4,7 +4,7 @@ var fs = require('fs');
 
 //Called everytime a value of a node is changed
 nodeLookout.zwave.on('value changed', function() {
-  //checkMail() parses 'client-server/ftpPostOffice/delivery/handel.json'
+  //checkMail() parses 'client-server/ftpPostOffice/delivery/handle.json'
   var obj = checkMail();
   if(obj['protocol'] == true) {
     var state = {"current":false};
