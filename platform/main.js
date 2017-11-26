@@ -21,5 +21,5 @@ nodeLookout.zwave.on('value changed', function() {
 });
 
 function checkMail() {
-  return(JSON.parse(fs.readFileSync('client-server/ftpPostOffice/delivery/handel.json')));
+  return(JSON.parse(fs.readFileSync('client-server/ftpPostOffice/delivery/handle.json')));
 }
