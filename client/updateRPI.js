@@ -12,14 +12,14 @@ var options = {
 
 var myInfo = {
     ip: 'ip'/*network.en0[1]['address']*/,
-    ma: 'ma'/*network.en0[1]['mac']*/
+    ma: 'mac'/*network.en0[1]['mac']*/
 
 }
 
 //Run protocol that sends the protocol and some info (main.js)
 exports.send = function(protocol) {
     //Read 'mail/handel.json'
-    var obj1 = function () {return(JSON.parse(fs.readFileSync('client-send/handel.json')))};
+    var obj1 = function () {return(JSON.parse(fs.readFileSync('client-send/handle.json')))};
     var obj = obj1();
     //Update 'mail/handle.json' info
     obj['protocol'] = protocol;
@@ -27,13 +27,13 @@ exports.send = function(protocol) {
     console.log(obj);
     //Update 'mail/handle.json'
     var json = JSON.stringify(obj);
-    fs.writeFile('client-send/handel.json', json);
+    fs.writeFile('client-send/handle.json', json);
     //This client connection can be moved once more features are added
     var client = new ftpClient(config, options);
     client.connect(function () {
-        client.upload(['client-send/handel.json'], 'server-mail', {
-            baseDir: 'server-mail',
-            overwrite: 'all'
+        client.upload(['client-send/handle.json'], 'server-mail', {
+            baseDir: 'client-send',
+            overwrite: 'older'
         }, function (result) {
             console.log(result);
         });
