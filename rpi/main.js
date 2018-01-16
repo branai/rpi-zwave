@@ -18,8 +18,8 @@ nodeLookout.zwave.on('value changed', function() {
        var client = new ftpClient(config, options);
        client.connect(function () {
            client.upload(['rpi-send/state.json'], 'server-mail', {
-               baseDir: 'server-mail',
-               overwrite: 'older'
+               baseDir: 'rpi-send',
+               overwrite: 'all'
            }, function (result) {
                console.log(result);
            });

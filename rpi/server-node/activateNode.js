@@ -4,9 +4,37 @@ var fs = require('fs');
 //Port for the zstick (CAN BE DIFFERENT FOR OTHER SYSTEMS), so TODO: unimportant: write method to find port for zstick in /dev/ directory
 var porty = '/dev/ttyACM0';
 //Data structure for all nodes on porty network
-var state = {
+
+var reset = false;
+var state;
+if(reset){
+  state = {
+    "triggers":[],
+    "nodes":[]
+  }
+} else {
+  function checkMail() {
+    return(JSON.parse(fs.readFileSync('rpi-send/state.json')));
+  }
+  state = checkMail();
+}
+
+var highestId = state['nodes'].length;
+
+
+var state;
+if(reset){
+state = {
   "triggers":[],
   "nodes":[]
+}
+}else{
+function checkMail() {
+console.log("____________________________");
+  return(JSON.parse(fs.readFileSync('rpi-send/state.json')));
+}
+state = checkMail();
+console.log("------------",state);
 }
 
 var zwave = new ZWave({
@@ -23,13 +51,16 @@ zwave.on('scan complete', function() { console.log('___scan complete___'); });
 //Add a node to data structure
 zwave.on('node added', function(id) {
   //TODO:Should i add manufacturer
-  state['nodes'][id]={
-    "id": id,
-    "name": '',
-    "battery": '',
-    "date": '',
-    "ready": false
-  };
+  if(id > highestId){
+    //TODO:Should i add manufacturer
+    state['nodes'][id]={
+      "id": id,
+      "name": '',
+      "battery": '',
+      "date": '',
+      "ready": false
+    };
+  }
 });
 
 //Node is ready to operate
