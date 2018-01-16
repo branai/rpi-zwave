@@ -1,12 +1,12 @@
 var ftpd = require('ftpd');
 var options = {
-    host: process.env.IP || '10.252.35.9', //<-- localhost ip address
-    port: process.env.PORT || 7002, //<-- port 7002 can ftp
+    host: process.env.IP || '52.53.80.40', //<-- localhost ip address
+    port: process.env.PORT || 7001, //<-- port 7002 can ftp
 };
 
 var server = new ftpd.FtpServer(options.host, {
   getRoot: function () {
-    return process.cwd()+'/client-server/ftpPostOffice/'; //<-- all communication takes place in this directory
+    return process.cwd()+'/ftpPostOffice/public/'; //<-- all communication takes place in this directory
   },
   getInitialCwd: function () {
     return '/'; //<-- starting directory relative to getRoot
@@ -15,6 +15,7 @@ var server = new ftpd.FtpServer(options.host, {
 
 //This method authorizes EVERYONE who connects, so TODO: create a authentication system based off of a attribute in handle.json
 server.on('client:connected', function (connection) {
+  console.log("hello");
   connection.on('command:user', function (user, success, failure) {
     success();
   });

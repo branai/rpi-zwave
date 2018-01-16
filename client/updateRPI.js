@@ -3,8 +3,8 @@ var fs = require('fs');
 var os = require('os');
 var network = os.networkInterfaces();
 var config = {
-    host: '10.252.35.9', //<-- ip to ftp to
-    port: 7002 //<-- ftp port server is taking ftp requests
+    host: '52.53.80.40', //<-- ip to ftp to
+    port: 7001 //<-- ftp port server is taking ftp requests
 }
 
 var options = {
@@ -12,8 +12,8 @@ var options = {
 }
 
 var myInfo = {
-    ip: network.en0[1]['address'],
-    ma: network.en0[1]['mac']
+    ip: /*network.eth0[1]['address']*/'20',
+    ma: network.eth0[1]['mac']
 }
 
 //Run protocol that sends the protocol and some info (main.js)
