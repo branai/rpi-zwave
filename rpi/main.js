@@ -6,7 +6,7 @@ var ftpClient = require('ftp-client')
 nodeLookout.zwave.on('value changed', function() {
   //var obj = checkMail();
   //if(obj['protocol'] == true) {
-     fs.writeFile('rpi-send/state.json', JSON.stringify(nodeLookout.state));
+     fs.writeFile('state.json', JSON.stringify(nodeLookout.state));
      var config = {
        host: '52.53.80.40', //<-- ip to ftp to
        port: 7001 //<-- ftp port server is taking ftp requests
@@ -17,8 +17,8 @@ nodeLookout.zwave.on('value changed', function() {
    }
        var client = new ftpClient(config, options);
        client.connect(function () {
-           client.upload(['rpi-send/state.json'], 'server-mail', {
-               baseDir: 'rpi-send',
+           client.upload(['state.json'], '.', {
+               baseDir: '.',
                overwrite: 'all'
            }, function (result) {
                console.log(result);
@@ -28,5 +28,5 @@ nodeLookout.zwave.on('value changed', function() {
 });
 
 function checkMail() {
-  return(JSON.parse(fs.readFileSync('rpi-take/handel.json')));
+  return(JSON.parse(fs.readFileSync('handle.json')));
 }

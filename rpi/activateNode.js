@@ -14,7 +14,7 @@ if(reset){
   }
 } else {
   function checkMail() {
-    return(JSON.parse(fs.readFileSync('rpi-send/state.json')));
+    return(JSON.parse(fs.readFileSync('state.json')));
   }
   state = checkMail();
 }
@@ -31,7 +31,7 @@ state = {
 }else{
 function checkMail() {
 console.log("____________________________");
-  return(JSON.parse(fs.readFileSync('rpi-send/state.json')));
+  return(JSON.parse(fs.readFileSync('state.json')));
 }
 state = checkMail();
 console.log("------------",state);
@@ -82,7 +82,7 @@ zwave.on('value changed', function(id, commandclass, value) {
         "nodeId":state['nodes'][id]['id'],
         "state":value['value']
       });
-    }	 
+    }
   }
 });
 
