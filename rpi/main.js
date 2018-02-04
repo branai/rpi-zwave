@@ -1,4 +1,4 @@
-var nodeLookout = require('./server-node/activateNode.js');
+var nodeLookout = require('./activateNode.js');
 var fs = require('fs');
 var ftpClient = require('ftp-client')
 
