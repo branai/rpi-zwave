@@ -2,6 +2,6 @@
 
 var connect = require('./updateRPI');
 var want = true;
-connect.send(want);
+connect.take();
 
 //TODO: make method for reading the state.json on rpi

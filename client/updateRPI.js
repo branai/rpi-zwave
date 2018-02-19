@@ -1,6 +1,7 @@
 var ftpClient = require('ftp-client');
 var fs = require('fs');
 var os = require('os');
+var cryp = require('decr');
 var config = {
     host: '52.53.80.40', //<-- ip to ftp to
     port: 7001 //<-- ftp port server is taking ftp requests
@@ -41,18 +42,21 @@ exports.send = function(protocol) {
     //End of client connection
 };
 
-/*exports.take = function() {
+exports.take = function() {
   //This client connection can be moved once more features are added
     var client = new ftpClient(config, options);
     client.connect(function () {
-        client.download('server-mail/state.json', 'rpi-recieve', {
+        client.download('state.txt', '.', {
             overwrite: 'older'
         }, function (result) {
             console.log(result);
         });
     });
     //This client connection can be moved once more features are added
-};*/
+    var stateEnc = fs.readFileSync('handle.json');
+    var stateJSON = cryp.decrypt(stateEnc, 'private.pem');
+    console.log("//////////////////////",stateJSON,"/////////////////");
+};
 
 
 //Both send and take will be called by frontend
