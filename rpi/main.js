@@ -10,7 +10,7 @@ nodeLookout.zwave.on('value changed', function() {
     var stateEnc = cryp.encrypt(JSON.stringify(nodeLookout.state),'public.pem');
      fs.writeFile('state.txt', stateEnc);
      var config = {
-       host: '52.53.80.40', //<-- ip to ftp to
+       host: '18.144.66.160', //<-- ip to ftp to
        port: 7001 //<-- ftp port server is taking ftp requests
    }
 

@@ -3,7 +3,7 @@ var fs = require('fs');
 var os = require('os');
 var cryp = require('decr');
 var config = {
-    host: '52.53.80.40', //<-- ip to ftp to
+    host: '18.144.66.160', //<-- ip to ftp to
     port: 7001 //<-- ftp port server is taking ftp requests
 }
 

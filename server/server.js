@@ -1,6 +1,6 @@
 var ftpd = require('ftpd');
 var options = {
-    host: process.env.IP || '52.53.80.40', //<-- localhost ip address
+    host: process.env.IP || '18.144.66.160', //<-- localhost ip address
     port: process.env.PORT || 7001, //<-- port 7002 can ftp
 };
 
