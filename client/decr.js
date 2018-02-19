@@ -2,9 +2,9 @@ var crypto = require("crypto");
 var path = require("path");
 var fs = require("fs");
 
-exports.decrypt = function(encrypted, pathy) {
-    var key = fs.readFileSync(pathy, "utf8");
-    var buffer = new Buffer(encrypted, "base64");
-    var decrypted = crypto.privateDecrypt(key, buffer);
-    return decrypted.toString("utf8");
-};
+exports.decrypt = function(text) {
+  var key = fs.readFileSync('key.txt');
+  var decipher = crypto.createDecipher('aes-256-ctr',key)
+  var stateDec = decipher.update(text,'hex','utf8')
+  return stateDec;
+}
