@@ -50,6 +50,8 @@ exports.take = function() {
             overwrite: 'all'
         }, function (result) {
             console.log(result);
+            var str = fs.readFileSync('state.txt').toString();
+            fs.writeFile('state.json',cryp.decrypt(str));
         });
     });
     //This client connection can be moved once more features are added
