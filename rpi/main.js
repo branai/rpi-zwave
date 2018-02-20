@@ -5,8 +5,6 @@ var cryp = require('./encr.js');
 
 //Called everytime a value of a node is changed
 nodeLookout.zwave.on('value changed', function() {
-  //var obj = checkMail();
-  //if(obj['protocol'] == true) {
     var stateEnc = cryp.encrypt(JSON.stringify(nodeLookout.state));
      fs.writeFile('state.txt', stateEnc);
      var config = {
@@ -28,7 +26,3 @@ nodeLookout.zwave.on('value changed', function() {
        });
   //}
 });
-
-function checkMail() {
-  return(JSON.parse(fs.readFileSync('handle.json')));
-}
