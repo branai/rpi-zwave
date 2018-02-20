@@ -4,7 +4,7 @@ var cryp = require('./decr.js')
 var connect = require('./comm.js');
 var want = true;
 connect.take();
-var stateEnc = fs.readFileSync('state.txt');
-var stateJSON = cryp.decrypt(stateEnc, 'key.txt');
-console.log("//////////////////////",stateJSON,"/////////////////");
+//var stateEnc = fs.readFileSync('state.txt');
+//var stateJSON = cryp.decrypt(stateEnc, 'key.txt');
+//console.log("//////////////////////",stateJSON,"/////////////////");
 //TODO: make method for reading the state.json on rpi
