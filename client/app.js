@@ -1,7 +1,7 @@
 //View state with ftp://IPADDRESS:7002/public/state.json
 var fs = require('fs');
 var cryp = require('./decr.js')
-var connect = require('./updateRPI');
+var connect = require('./comm.js');
 var want = true;
 connect.take();
 var stateEnc = fs.readFileSync('state.txt');
