@@ -1,7 +1,7 @@
 var ftpClient = require('ftp-client');
 var fs = require('fs');
 var os = require('os');
-var cryp = require('decr');
+var cryp = require('./decr.js');
 var config = {
     host: '18.144.66.160', //<-- ip to ftp to
     port: 7001 //<-- ftp port server is taking ftp requests
@@ -46,16 +46,13 @@ exports.take = function() {
   //This client connection can be moved once more features are added
     var client = new ftpClient(config, options);
     client.connect(function () {
-        client.download('state.txt', '.', {
-            overwrite: 'older'
+        client.download('.', '.', {
+            overwrite: 'all'
         }, function (result) {
             console.log(result);
         });
     });
     //This client connection can be moved once more features are added
-    var stateEnc = fs.readFileSync('handle.json');
-    var stateJSON = cryp.decrypt(stateEnc, 'private.pem');
-    console.log("//////////////////////",stateJSON,"/////////////////");
 };
 
 
