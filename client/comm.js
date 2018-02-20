@@ -46,12 +46,17 @@ exports.take = function() {
   //This client connection can be moved once more features are added
     var client = new ftpClient(config, options);
     client.connect(function () {
-        client.download('container', '.', {
+        client.download('container', 'notValidated', {
             overwrite: 'all'
         }, function (result) {
             console.log(result);
-            var str = fs.readFileSync('state.txt').toString();
-            fs.writeFile('state.json',cryp.decrypt(str));
+            var str = fs.readFileSync('notValidaved/state.txt').toString();
+            try {
+              JSON.parse(cryp.decrypt(str));
+            } catch(e) {
+              return;
+            }
+            var jsonString = fs.writeFile('state.json',cryp.decrypt(str));
         });
     });
     //This client connection can be moved once more features are added

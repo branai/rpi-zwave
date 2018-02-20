@@ -6,7 +6,7 @@ var options = {
 
 var server = new ftpd.FtpServer(options.host, {
   getRoot: function () {
-    return process.cwd()+'/public/notValidated/'; //<-- all communication takes place in this directory
+    return process.cwd()+'/public/'; //<-- all communication takes place in this directory
   },
   getInitialCwd: function () {
     return '/'; //<-- starting directory relative to getRoot
