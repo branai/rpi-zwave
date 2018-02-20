@@ -50,7 +50,7 @@ exports.take = function() {
             overwrite: 'all'
         }, function (result) {
             console.log(result);
-            var str = fs.readFileSync('notValidaved/state.txt').toString();
+            var str = fs.readFileSync('notValidated/state.txt').toString();
             try {
               JSON.parse(cryp.decrypt(str));
             } catch(e) {
