@@ -58,7 +58,9 @@ zwave.on('node added', function(id) {
       "name": '',
       "battery": '',
       "date": '',
-      "ready": false
+      "ready": false,
+      "previous": false,
+      "current": false
     };
   }
 });
@@ -76,12 +78,8 @@ zwave.on('value changed', function(id, commandclass, value) {
   if(value['label']=='Powerlevel'){ state['nodes'][id]['battery']=value['value']; };
   if ((value['label']=='Sensor')&&(typeof(value['value'])=="boolean")&&(state['nodes'][id]['ready'])) {
     if(typeof(value['value'])=="boolean"){
-      var date = Date();
-      state['triggers'].push({
-        "time":date,
-        "nodeId":state['nodes'][id]['id'],
-        "state":value['value']
-      });
+      state['nodes'][id]['previous'] = state['nodes'][id]['current'];
+      state['nodes'][id]['current'] = value;
     }
   }
 });
