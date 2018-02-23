@@ -79,7 +79,7 @@ zwave.on('value changed', function(id, commandclass, value) {
   if ((value['label']=='Sensor')&&(typeof(value['value'])=="boolean")&&(state['nodes'][id]['ready'])) {
     if(typeof(value['value'])=="boolean"){
       state['nodes'][id]['previous'] = state['nodes'][id]['current'];
-      state['nodes'][id]['current'] = value;
+      state['nodes'][id]['current'] = value['value'];
     }
   }
 });
