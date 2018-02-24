@@ -9,7 +9,6 @@ var reset = true;
 var state;
 if(reset){
   state = {
-    "triggers":[],
     "nodes":[]
   }
 } else {
