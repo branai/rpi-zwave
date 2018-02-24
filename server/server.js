@@ -1,4 +1,5 @@
 var ftpd = require('ftpd');
+var fs = require('fs');
 var options = {
     host: process.env.IP || '54.193.44.245', //<-- localhost ip address
     port: process.env.PORT || 7001, //<-- port 7002 can ftp
@@ -27,7 +28,9 @@ server.on('error', function (error) {
   console.log('FTP Server error:', error);
 });
 
-server.on('finish', function(){console.log("__________________________");});
+fs.watchFile('public/container/state.txt', function(){
+  console.log('______________________________________');
+});
 
 server.debugging = 4;
 server.listen(options.port);
