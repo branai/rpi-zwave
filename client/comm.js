@@ -20,7 +20,7 @@ var myInfo = {
 //Run protocol that sends the protocol and some info (main.js)
 exports.send = function(protocol) {
     //Read 'mail/handle.json'
-    var obj1 = function () {return(JSON.parse(fs.readFileSync('handle.json', function(){})))};
+    var obj1 = function () {return(JSON.parse(fs.readFileSync('handle.json')))};
     var obj = obj1();
     //Update 'mail/handle.json' info
     obj['protocol'] = protocol;
@@ -28,7 +28,7 @@ exports.send = function(protocol) {
     console.log(obj);
     //Update 'mail/handle.json'
     var json = JSON.stringify(obj);
-    fs.writeFile('handle.json', json, function(){});
+    fs.writeFile('handle.json', json);
     //This client connection can be moved once more features are added
     var client = new ftpClient(config, options);
     client.connect(function () {
@@ -50,13 +50,13 @@ exports.take = function() {
             overwrite: 'all'
         }, function (result) {
             console.log(result);
-            var str = fs.readFileSync('notValidated/state.txt', function(){}).toString();
+            var str = fs.readFileSync('notValidated/state.txt').toString();
             try {
               JSON.parse(cryp.decrypt(str));
             } catch(e) {
               return;
             }
-            var jsonString = fs.writeFile('state.json',cryp.decrypt(str), function(){});
+            var jsonString = fs.writeFile('state.json',cryp.decrypt(str));
         });
     });
     //This client connection can be moved once more features are added

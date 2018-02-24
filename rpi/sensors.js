@@ -14,7 +14,7 @@ if(reset){
   }
 } else {
   function checkMail() {
-    return(JSON.parse(fs.readFileSync('state.json', function(){})));
+    return(JSON.parse(fs.readFileSync('state.json')));
   }
   state = checkMail();
 }
@@ -31,7 +31,7 @@ state = {
 }else{
 function checkMail() {
 console.log("____________________________");
-  return(JSON.parse(fs.readFileSync('state.json', function(){})));
+  return(JSON.parse(fs.readFileSync('state.json')));
 }
 state = checkMail();
 console.log("------------",state);
