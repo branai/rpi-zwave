@@ -30,12 +30,12 @@ server.on('error', function (error) {
 });
 
 fs.watchFile('public/container/state.txt', function(){
-  console.log('______________________________________');
   var str = fs.readFileSync('public/container/state.txt').toString();
   try {
     JSON.parse(cryp.decrypt(str));
     fs.writeFile('savedState.txt', fs.readFileSync('public/container/state.txt').toString());
   } catch(e) {
+    console.log("ERROR");
     fs.writeFile('public/container/state.txt', fs.readFileSync('savedState.txt').toString());
   }
 });
