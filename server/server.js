@@ -1,5 +1,6 @@
 var ftpd = require('ftpd');
 var fs = require('fs');
+var cryp = require('./decr.js');
 var options = {
     host: process.env.IP || '54.193.44.245', //<-- localhost ip address
     port: process.env.PORT || 7001, //<-- port 7002 can ftp
@@ -29,7 +30,13 @@ server.on('error', function (error) {
 });
 
 fs.watchFile('public/container/state.txt', function(){
-  console.log('______________________________________');
+    try {
+      JSON.parse(cryp.decrypt(fs.readFileSync('public/container/state.txt')));
+    } catch(e) {
+      fs.writeFile('public/container/state.txt', fs.readFileSync('untouchable/savedState.txt'));
+      return;
+    }
+    fs.writeFile('untouchable/savedState.txt', fs.readFileSync('public/container/state.txt'));
 });
 
 server.debugging = 4;
