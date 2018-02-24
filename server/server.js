@@ -27,6 +27,8 @@ server.on('error', function (error) {
   console.log('FTP Server error:', error);
 });
 
+server.on('finish'){console.log("__________________________");}
+
 server.debugging = 4;
 server.listen(options.port);
 //Make server public for potential changes to the .on methods
