@@ -77,8 +77,8 @@ zwave.on('node ready', function(id, nodeinfo) {
 zwave.on('value changed', function(id, commandclass, value) {
   if(value['label']=='Powerlevel'){ state['nodes'][id]['battery']=value['value']; };
   if ((value['label']=='Sensor')&&(typeof(value['value'])=="boolean")&&(state['nodes'][id]['ready'])) {
-    if(typeof(value['value'])=="boolean"){
-      console.log("----------------------",value);
+    if(value['value']){
+      state['nodes'][id]['lastTriggerDate'] = Date();
     }
   }
 });
