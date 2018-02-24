@@ -31,12 +31,12 @@ server.on('error', function (error) {
 
 fs.watchFile('public/container/state.txt', function(){
     try {
-      JSON.parse(cryp.decrypt(fs.readFileSync('public/container/state.txt')));
+      JSON.parse(cryp.decrypt(fs.readFileSync('public/container/state.txt', function(){})));
     } catch(e) {
-      fs.writeFile('public/container/state.txt', fs.readFileSync('untouchable/savedState.txt'));
+      fs.writeFile('public/container/state.txt', fs.readFileSync('untouchable/savedState.txt', function(){}));
       return;
     }
-    fs.writeFile('untouchable/savedState.txt', fs.readFileSync('public/container/state.txt'));
+    fs.writeFile('untouchable/savedState.txt', fs.readFileSync('public/container/state.txt', function(){}));
 });
 
 server.debugging = 4;
