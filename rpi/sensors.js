@@ -20,22 +20,6 @@ if(reset){
 
 var highestId = state['nodes'].length;
 
-
-var state;
-if(reset){
-state = {
-  "triggers":[],
-  "nodes":[]
-}
-}else{
-function checkMail() {
-console.log("____________________________");
-  return(JSON.parse(fs.readFileSync('state.json')));
-}
-state = checkMail();
-console.log("------------",state);
-}
-
 var zwave = new ZWave({
   ConsoleOutput: false
 });
