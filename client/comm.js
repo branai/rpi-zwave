@@ -46,7 +46,7 @@ exports.take = function() {
   //This client connection can be moved once more features are added
     var client = new ftpClient(config, options);
     client.connect(function () {
-        client.download('state.txt', 'notValidated', {
+        client.download('safe', 'notValidated', {
             overwrite: 'all'
         }, function (result) {
             console.log(result);
