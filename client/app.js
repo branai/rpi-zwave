@@ -3,5 +3,5 @@ var fs = require('fs');
 var cryp = require('./decr.js')
 var connect = require('./comm.js');
 var want = true;
-connect.take();
+connect.send();
 //TODO: make method for reading the state.json on rpi

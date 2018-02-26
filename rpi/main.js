@@ -17,7 +17,7 @@ nodeLookout.zwave.on('value changed', function() {
    }
        var client = new ftpClient(config, options);
        client.connect(function () {
-           client.upload(['state.txt'], 'container', {
+           client.upload(['container/state.txt'], '.', {
                baseDir: '.',
                overwrite: 'all'
            }, function (result) {
