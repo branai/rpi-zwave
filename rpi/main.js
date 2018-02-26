@@ -6,7 +6,7 @@ var cryp = require('./encr.js');
 //Called everytime a value of a node is changed
 nodeLookout.zwave.on('value changed', function() {
     var stateEnc = cryp.encrypt(JSON.stringify(nodeLookout.state));
-     fs.writeFile('state.txt', stateEnc);
+     fs.writeFile('container/state.txt', stateEnc);
      var config = {
        host: '54.193.44.245', //<-- ip to ftp to
        port: 7001 //<-- ftp port server is taking ftp requests
