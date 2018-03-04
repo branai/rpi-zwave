@@ -1,0 +1,4 @@
+while :
+  do 
+    node send.js
+done
