@@ -5,7 +5,7 @@ var fs = require('fs');
 var porty = '/dev/ttyACM0';
 //Data structure for all nodes on porty network
 
-var reset = true;
+var reset = false;
 var state;
 if(reset){
   state = {
@@ -33,9 +33,7 @@ zwave.on('scan complete', function() { console.log('___scan complete___'); });
 
 //Add a node to data structure
 zwave.on('node added', function(id) {
-  //TODO:Should i add manufacturer
   if(id > highestId){
-    //TODO:Should i add manufacturer
     state['nodes'][id]={
       "id": id,
       "name": '',
@@ -64,6 +62,8 @@ zwave.on('value changed', function(id, commandclass, value) {
       state['nodes'][id]['lastTriggerDate'] = Date();
     }
   }
+  //THIS WHERE STATE IS STORED LOCALLY. DO NOT MOVE STATE.JSON
+  fs.writeFile('state.json', JSON.stringify(state));
 });
 
 //Disconnected
