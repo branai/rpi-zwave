@@ -1,7 +1,7 @@
-var aesjs = require('aes-js');
+var aes256 = require('aes256');
+var fs = require('fs');
 exports.encrypt = function(text){
-  var key = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ];
-  var textBytes = aesjs.utils.utf8.toBytes(text);
-  var aesCtr = new aesjs.ModeOfOperation.ctr(key);
-  return(aesCtr.encrypt(textBytes));
+  var key = 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCTi32Lm+SR+GDza8LquZ9XKLygViElmYgmiAmzhwZWrM7t+OUn1DWrIO6aSiWflNp7E3k4IK13uWKXI9oadBfImIy3dmocrJXi8tOhWN1hDLIQgFisRF4RcLJGUipzUsqHrXeDOenPfs0Q7M+fzY00CJHvfNsZRU3N7ibChjhWNwIDAQAB';
+  var encrypted = aes256.encrypt(key, text);
+  return(encrypted)
 }
