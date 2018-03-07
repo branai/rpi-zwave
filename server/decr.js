@@ -1,8 +1,6 @@
-var aesjs = require('aes-js');
-exports.decrypt = function(bytes){
-var key = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ];
-var aesCtr = new aesjs.ModeOfOperation.ctr(key);
-var decryptedBytes = aesCtr.decrypt(bytes);
-var decryptedText = aesjs.utils.utf8.fromBytes(decryptedBytes);
-return(decryptedText);
+var aes256 = require('aes256');
+exports.decrypt = function(text){
+  var key = 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCTi32Lm+SR+GDza8LquZ9XKLygViElmYgmiAmzhwZWrM7t+OUn1DWrIO6aSiWflNp7E3k4IK13uWKXI9oadBfImIy3dmocrJXi8tOhWN1hDLIQgFisRF4RcLJGUipzUsqHrXeDOenPfs0Q7M+fzY00CJHvfNsZRU3N7ibChjhWNwIDAQAB';
+  var decrypted = aes256.decrypt(key, text);
+  return(decrypted)
 }
