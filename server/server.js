@@ -1,6 +1,6 @@
 var http = require('http');
-var state = "this should not be here";
 var fs = require('fs');
+var state = 'this should not be here';
 var decr = require('./decr.js');
 var port = 7001;
 var querystring  = require('querystring');
