@@ -1,6 +1,23 @@
-var aes256 = require('aes256');
-exports.decrypt = function(text){
-  var key = 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCTi32Lm+SR+GDza8LquZ9XKLygViElmYgmiAmzhwZWrM7t+OUn1DWrIO6aSiWflNp7E3k4IK13uWKXI9oadBfImIy3dmocrJXi8tOhWN1hDLIQgFisRF4RcLJGUipzUsqHrXeDOenPfs0Q7M+fzY00CJHvfNsZRU3N7ibChjhWNwIDAQAB';
-  var decrypted = aes256.decrypt(key, text);
-  return(decrypted)
+var crypto = require('crypto');
+exports.decrypt = function(text1){
+    var algorithm = 'aes-256-ctr';
+    var password = 'hello';
+
+function encrypt(text){
+  var cipher = crypto.createCipher(algorithm,password)
+  var crypted = cipher.update(text,'utf8','hex')
+  crypted += cipher.final('hex');
+  return crypted;
+}
+ 
+function decrypt(text){
+  var decipher = crypto.createDecipher(algorithm,password)
+  var dec = decipher.update(text,'hex','utf8')
+  dec += decipher.final('utf8');
+  return dec;
+}
+
+ 
+return(decrypt(text1));
+
 }
