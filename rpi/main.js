@@ -13,7 +13,7 @@ nodeLookout.zwave.on('value changed', function() {
   }
   var req = http.request(options);
   req.write(require('querystring').stringify({
-    'str':stateEnc
+    'str':stateEnc.toString()
   }));
   req.end();
 });

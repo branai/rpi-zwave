@@ -5,7 +5,7 @@ var fs = require('fs');
 var porty = '/dev/ttyACM0';
 //Data structure for all nodes on porty network
 
-var reset = false;
+var reset = true;
 var state;
 if(reset){
   state = {
