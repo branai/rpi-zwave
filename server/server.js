@@ -1,12 +1,15 @@
 var http = require('http');
 var fs = require('fs');
-var state = 'this should not be here';
+var state = 'state has not been updated yet';
 var decr = require('./decr.js');
 var port = 7001;
 var failCount = {};
 
 var querystring  = require('querystring');
 var server = http.createServer(function(request, response) {
+  if(failCount[request.connection.remoteAddress] > 10) {
+    res.destroy();
+  }
   if(request.method != "POST") {
     response.end(state.toString());
     return;
@@ -28,9 +31,6 @@ var server = http.createServer(function(request, response) {
         failCount[request.connection.remoteAddress] = 1;
       } else {
         failCount[request.connection.remoteAddress]++;
-      }
-      if(failCount[request.connection.remoteAddress] > 10) {
-        res.destroy();
       }
     }
   });
