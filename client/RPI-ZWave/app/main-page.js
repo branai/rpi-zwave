@@ -33,7 +33,7 @@ exports.switched = function(args){
         for(var i = 1; i < pulledJSON['nodes'].length; i++){
           if(pulledJSON['nodes'][i]['lastTriggerDate'] != lastChecked['nodes'][i]['lastTriggerDate']){
             if(initSwitch){
-              alert("There was an alarm trip while you were gone.");
+              alert("There was either an alarm trip just now or an alarm trip while you were gone.");
               initSwitch = false;
             } else {
               alert("ALARM TRIP");
