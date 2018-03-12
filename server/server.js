@@ -8,7 +8,7 @@ var failCount = {};
 var querystring  = require('querystring');
 var server = http.createServer(function(request, response) {
   if(failCount[request.connection.remoteAddress] > 10) {
-    response.destroy();
+    response.end();
   }
   if(request.method != "POST") {
     response.end(state.toString());
