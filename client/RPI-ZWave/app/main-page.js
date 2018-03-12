@@ -18,6 +18,7 @@ var download = function() {
 
 var lastChecked;
 var runDownload;
+var initSwitch = false;
 exports.switched = function(args){
   if(!args.object.checked){
     runDownload = setInterval(function() {
@@ -31,15 +32,22 @@ exports.switched = function(args){
       try {
         for(var i = 1; i < pulledJSON['nodes'].length; i++){
           if(pulledJSON['nodes'][i]['lastTriggerDate'] != lastChecked['nodes'][i]['lastTriggerDate']){
-            alert("ALARM TRIP")
+            if(initSwitch){
+              alert("There was an alarm trip while you were gone.");
+              initSwitch = false;
+            } else {
+              alert("ALARM TRIP");
+            }
             lastChecked = pulledJSON;
+            break; 
           }
         }
       } catch(e) {
-
+     
       }
     }, 1000);
   } else {
+    initSwitch = true;
     lastChecked = pulledJSON;
     clearInterval(runDownload);
   }
