@@ -62,7 +62,7 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		fPj1l7s3rSITuQOpbi8EsUX1n/M=
+		G4XERuGIvwbY5GebWk3d9Fgq3OQ=
 		</data>
 		<key>Frameworks/NativeScript.framework/Info.plist</key>
 		<data>
@@ -166,7 +166,7 @@
 		</data>
 		<key>LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<data>
-		INuM55ab+bdnjPfb3sdDI5xVjCw=
+		H50HPo/DLCsbKZ7F6FcvstgtMjg=
 		</data>
 		<key>LaunchScreen.storyboardc/Info.plist</key>
 		<data>
@@ -174,7 +174,7 @@
 		</data>
 		<key>LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib</key>
 		<data>
-		0aLlAq2b8eN6AYTD76nZfaTpeuc=
+		SkKcjJ8QH8RX5mN6CHLWjI8vDho=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -202,7 +202,7 @@
 		</data>
 		<key>app/main-page.js</key>
 		<data>
-		Ht3Jn9mgd5Z/msSjecekgYCPpw8=
+		9VMcPGK2MkWPF9k6IDl0Rl2TS9I=
 		</data>
 		<key>app/main-page.xml</key>
 		<data>
@@ -2906,11 +2906,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			fPj1l7s3rSITuQOpbi8EsUX1n/M=
+			G4XERuGIvwbY5GebWk3d9Fgq3OQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			M+G/YbZ7JH02qQldg8dUQXFP5VsL684I87+jCJCLay4=
+			3CJjkpwWX7cU79AbZ1fKRB/7C+f9AeE60SK2YwUnIsU=
 			</data>
 		</dict>
 		<key>Frameworks/NativeScript.framework/Info.plist</key>
@@ -3181,11 +3181,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			INuM55ab+bdnjPfb3sdDI5xVjCw=
+			H50HPo/DLCsbKZ7F6FcvstgtMjg=
 			</data>
 			<key>hash2</key>
 			<data>
-			aP8HcM9WjVyR83S4Z4Ixw4scDD9ceiK6WVzcmMaIRkk=
+			XBKFIhkbuYCzd/HdnjH1Tr7FA2udQFM4SL5ujNeCop0=
 			</data>
 		</dict>
 		<key>LaunchScreen.storyboardc/Info.plist</key>
@@ -3203,11 +3203,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			0aLlAq2b8eN6AYTD76nZfaTpeuc=
+			SkKcjJ8QH8RX5mN6CHLWjI8vDho=
 			</data>
 			<key>hash2</key>
 			<data>
-			pOUulTk1mOHxvsYCbNGX4MPxcpXGXwH/+fyfzzQ+nSI=
+			o2Ui9xOIaAdQ+DmsSRtSOjrBCUEBIloJOMYouRC/f9E=
 			</data>
 		</dict>
 		<key>app/LICENSE</key>
@@ -3269,11 +3269,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Ht3Jn9mgd5Z/msSjecekgYCPpw8=
+			9VMcPGK2MkWPF9k6IDl0Rl2TS9I=
 			</data>
 			<key>hash2</key>
 			<data>
-			N+jdE9cXPpAFNtSV51Gj9IohAOixptQgn3k6FiX2asw=
+			X/5Yfs8FLEzQUnyQGSiAPhB4R6I6iPKtgFEolify3yI=
 			</data>
 		</dict>
 		<key>app/main-page.xml</key>

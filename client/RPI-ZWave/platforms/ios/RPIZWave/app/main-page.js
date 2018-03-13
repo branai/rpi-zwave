@@ -1,7 +1,7 @@
 var http = require('http');
 var decr = require('./decr.js');
 var failCount = 0;
-var pulledJSON;
+var pulledJSON = {'nodes':[]};
 var download = function() {
   http.getString("http://54.193.44.245:7001").then(function (r) {
     try {
@@ -16,9 +16,9 @@ var download = function() {
   });
 }
 
-var lastChecked;
+var lastChecked = {'nodes':[]};
 var runDownload;
-var initSwitch = false;
+var initSwitch = 0;
 exports.switched = function(args){
   if(!args.object.checked){
     runDownload = setInterval(function() {
@@ -27,27 +27,26 @@ exports.switched = function(args){
         alert('DETECTED ATTACK');
         return;
       }
-      if(lastChecked == undefined || pulledJSON == undefined) lastChecked = pulledJSON;
-      console.log(lastChecked, pulledJSON)
-      try {
+        if(pulledJSON['nodes'].length != lastChecked['nodes'].length) lastChecked = pulledJSON;
         for(var i = 1; i < pulledJSON['nodes'].length; i++){
           if(pulledJSON['nodes'][i]['lastTriggerDate'] != lastChecked['nodes'][i]['lastTriggerDate']){
-            if(initSwitch){
-              alert("There was either an alarm trip just now or an alarm trip while you were gone.");
-              initSwitch = false;
+            if(initSwitch == 2){
+              alert("There was either an alarm trip while you were gone.");
             } else {
               alert("ALARM TRIP");
             }
             lastChecked = pulledJSON;
-            break; 
+            break;
           }
         }
-      } catch(e) {
-     
-      }
+        if(initSwitch == 1){
+          initSwitch = 2;
+        } else {
+          initSwitch = 0;
+        }
     }, 1000);
   } else {
-    initSwitch = true;
+    initSwitch = 1;
     lastChecked = pulledJSON;
     clearInterval(runDownload);
   }
