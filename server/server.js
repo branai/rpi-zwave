@@ -8,7 +8,7 @@ var failCount = {};
 var querystring  = require('querystring');
 var server = http.createServer(function(request, response) {
   if(failCount[request.connection.remoteAddress] > 10) {
-      response.destroy();
+      request.connection.destroy();
       return;
   }
   if(request.method != "POST") {
@@ -26,7 +26,7 @@ var server = http.createServer(function(request, response) {
       state = post.str;
       console.log('GOOD FILE');
       failCount = {};
-    } catch(e) { 
+    } catch(e) {
       console.log('BAD FILE');
       if(failCount[request.connection.remoteAddress] == undefined){
         failCount[request.connection.remoteAddress] = 1;
@@ -38,4 +38,6 @@ var server = http.createServer(function(request, response) {
   response.end();
 });
 
-server.listen(port, function(err) { console.log(`server is listening on ${port}`) });
+server.listen(port, function(err) {
+  console.log('Listening on port 7001');
+});

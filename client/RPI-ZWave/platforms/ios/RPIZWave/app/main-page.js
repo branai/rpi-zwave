@@ -27,11 +27,13 @@ exports.switched = function(args){
         alert('DETECTED ATTACK');
         return;
       }
-        if(pulledJSON['nodes'].length != lastChecked['nodes'].length) lastChecked = pulledJSON;
+        if(pulledJSON['nodes'].length != lastChecked['nodes'].length) {
+            lastChecked = pulledJSON;
+        }
         for(var i = 1; i < pulledJSON['nodes'].length; i++){
           if(pulledJSON['nodes'][i]['lastTriggerDate'] != lastChecked['nodes'][i]['lastTriggerDate']){
             if(initSwitch == 2){
-              alert("There was either an alarm trip while you were gone.");
+              alert("There was an alarm trip while you were gone.");
             } else {
               alert("ALARM TRIP");
             }

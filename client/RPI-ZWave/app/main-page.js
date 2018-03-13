@@ -2,21 +2,23 @@ var http = require('http');
 var decr = require('./decr.js');
 var failCount = 0;
 var pulledJSON = {'nodes':[]};
+var lastChecked = {'nodes':[]};
+
 var download = function() {
-  http.getString("http://54.193.44.245:7001").then(function (r) {
+  http.getString("http://54.193.44.245:7001").then(function (response) {
     try {
-      pulledJSON = JSON.parse(decr.decrypt(r.toString()));
+      pulledJSON = JSON.parse(decr.decrypt(response.toString()));
       console.log("GOOD FILE");
       failCount = 0;
     } catch(e) {
       console.log("BAD FILE");
+      failCount++;
     }
   }, function (e) {
      console.log(e.message);
   });
 }
 
-var lastChecked = {'nodes':[]};
 var runDownload;
 var initSwitch = 0;
 exports.switched = function(args){
@@ -27,10 +29,10 @@ exports.switched = function(args){
         alert('DETECTED ATTACK');
         return;
       }
-        if(pulledJSON['nodes'].length != lastChecked['nodes'].length) {
-            lastChecked = pulledJSON;
-        }
-        for(var i = 1; i < pulledJSON['nodes'].length; i++){
+      if(pulledJSON['nodes'].length != lastChecked['nodes'].length) {
+          lastChecked = pulledJSON;
+      }
+      for(var i = 1; i < pulledJSON['nodes'].length; i++){
           if(pulledJSON['nodes'][i]['lastTriggerDate'] != lastChecked['nodes'][i]['lastTriggerDate']){
             if(initSwitch == 2){
               alert("There was an alarm trip while you were gone.");
@@ -40,7 +42,7 @@ exports.switched = function(args){
             lastChecked = pulledJSON;
             break;
           }
-        }
+      }
         if(initSwitch == 1){
           initSwitch = 2;
         } else {
