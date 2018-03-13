@@ -17,7 +17,7 @@ if(reset){
 
 var highestId = state['nodes'].length;
 
-var zwave = new ZWave();
+var zwave = new ZWave({ConsoleOutput:false});
 
 console.log("CONNECTING TO " + porty);
 zwave.connect(porty);
